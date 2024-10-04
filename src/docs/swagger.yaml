@@ -80,7 +80,7 @@ paths:
               type: object
       summary: Add group
   /group/info:
-    get:
+    post:
       consumes:
       - application/json
       parameters:
@@ -169,7 +169,7 @@ paths:
               type: object
       summary: Delete song
   /song/info:
-    get:
+    post:
       consumes:
       - application/json
       parameters:
@@ -249,7 +249,7 @@ paths:
               type: object
       summary: Update song
   /verse/info:
-    get:
+    post:
       consumes:
       - application/json
       parameters:

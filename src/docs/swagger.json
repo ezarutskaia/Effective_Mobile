@@ -50,7 +50,7 @@
             }
         },
         "/group/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
@@ -202,7 +202,7 @@
             }
         },
         "/song/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
@@ -336,7 +336,7 @@
             }
         },
         "/verse/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],

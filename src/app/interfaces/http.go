@@ -138,7 +138,7 @@ func (server HttpServer) AddSong(controller *controller.Controller) (func(c echo
 // @Summary      Get group info
 // @Accept       json
 // @Produce      json
-// @Router       /group/info [get]
+// @Router       /group/info [post]
 // @Param        name   body   string  true  "Group name"
 // @Success      200  {object}	models.Response{data=models.GroupsDTO}
 func (server HttpServer) GroupInfo(controller *controller.Controller) (func(c echo.Context)  (err error)) {
@@ -173,7 +173,7 @@ func (server HttpServer) GroupInfo(controller *controller.Controller) (func(c ec
 // @Summary      Get song info
 // @Accept       json
 // @Produce      json
-// @Router       /song/info [get]
+// @Router       /song/info [post]
 // @Param        group   body   string  true  "Group name"
 // @Param        song   body   string  true  "Song name" 
 // @Param        releaseDat   body   string  false  "Date release"
@@ -237,7 +237,7 @@ func (server HttpServer) SongInfo(controller *controller.Controller) (func(c ech
 // @Summary      Get song verse
 // @Accept       json
 // @Produce      json
-// @Router       /verse/info [get]
+// @Router       /verse/info [post]
 // @Param        song_id   body   int  true  "Song ID"
 // @Param        page   body   int  false  "Page" 
 // @Success      200  {object}	models.Response{data=models.VersesDTO}
@@ -371,9 +371,9 @@ func (server HttpServer) HandleHttpRequest(controller *controller.Controller) {
 	
 	e.POST("/group/add", server.AddGroup(controller))
 	e.POST("/song/add", server.AddSong(controller))
-	e.GET("/group/info", server.GroupInfo(controller))
-	e.GET("/song/info", server.SongInfo(controller))
-	e.GET("/verse/info", server.VerseInfo(controller))
+	e.POST("/group/info", server.GroupInfo(controller))
+	e.POST("/song/info", server.SongInfo(controller))
+	e.POST("/verse/info", server.VerseInfo(controller))
 	e.PUT("/song/update", server.UpdateSong(controller))
 	e.DELETE("/song/delete", server.DeleteSong(controller))
 	

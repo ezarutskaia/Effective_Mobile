@@ -58,7 +58,7 @@ const docTemplate = `{
             }
         },
         "/group/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
@@ -210,7 +210,7 @@ const docTemplate = `{
             }
         },
         "/song/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
@@ -344,7 +344,7 @@ const docTemplate = `{
             }
         },
         "/verse/info": {
-            "get": {
+            "post": {
                 "consumes": [
                     "application/json"
                 ],
