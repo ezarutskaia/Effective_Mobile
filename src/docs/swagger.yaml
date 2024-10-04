@@ -249,21 +249,19 @@ paths:
               type: object
       summary: Update song
   /verse/info:
-    post:
+    get:
       consumes:
       - application/json
       parameters:
       - description: Song ID
-        in: body
+        in: query
         name: song_id
         required: true
-        schema:
-          type: integer
+        type: integer
       - description: Page
-        in: body
+        in: query
         name: page
-        schema:
-          type: integer
+        type: integer
       produces:
       - application/json
       responses:

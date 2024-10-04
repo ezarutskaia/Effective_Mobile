@@ -237,9 +237,9 @@ func (server HttpServer) SongInfo(controller *controller.Controller) (func(c ech
 // @Summary      Get song verse
 // @Accept       json
 // @Produce      json
-// @Router       /verse/info [post]
-// @Param        song_id   body   int  true  "Song ID"
-// @Param        page   body   int  false  "Page" 
+// @Router       /verse/info [get]
+// @Param        song_id   query   int  true  "Song ID"
+// @Param        page   query   int  false  "Page" 
 // @Success      200  {object}	models.Response{data=models.VersesDTO}
 func (server HttpServer) VerseInfo(controller *controller.Controller) (func(c echo.Context)  (err error)) {
 	return func(c echo.Context) (err error) {
@@ -249,7 +249,7 @@ func (server HttpServer) VerseInfo(controller *controller.Controller) (func(c ec
 			log.Info("The data for verse is incorrect")
 			return server.Response(c, "data reading error", Data{"verses": ""})
 		}
-
+		
 		var verses []*models.VerseDTOResp
 		if verseDTO.Page == 0 {
 			verses, err = controller.Repo.ListVerses(verseDTO.SongID)
@@ -323,7 +323,7 @@ func (server HttpServer) UpdateSong(controller *controller.Controller) (func(c e
 }
 
 
-// UpdateSong	 godoc
+// DeleteSong	 godoc
 // @Summary      Delete song
 // @Accept       json
 // @Produce      json
@@ -373,7 +373,7 @@ func (server HttpServer) HandleHttpRequest(controller *controller.Controller) {
 	e.POST("/song/add", server.AddSong(controller))
 	e.POST("/group/info", server.GroupInfo(controller))
 	e.POST("/song/info", server.SongInfo(controller))
-	e.POST("/verse/info", server.VerseInfo(controller))
+	e.GET("/verse/info", server.VerseInfo(controller))
 	e.PUT("/song/update", server.UpdateSong(controller))
 	e.DELETE("/song/delete", server.DeleteSong(controller))
 	

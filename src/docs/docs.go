@@ -344,7 +344,7 @@ const docTemplate = `{
             }
         },
         "/verse/info": {
-            "post": {
+            "get": {
                 "consumes": [
                     "application/json"
                 ],
@@ -354,21 +354,17 @@ const docTemplate = `{
                 "summary": "Get song verse",
                 "parameters": [
                     {
+                        "type": "integer",
                         "description": "Song ID",
                         "name": "song_id",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "in": "query",
+                        "required": true
                     },
                     {
+                        "type": "integer",
                         "description": "Page",
                         "name": "page",
-                        "in": "body",
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "in": "query"
                     }
                 ],
                 "responses": {
