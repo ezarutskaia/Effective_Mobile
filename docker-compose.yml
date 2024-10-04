@@ -7,8 +7,13 @@ services:
     volumes:
       - ./src:/go/src
     ports:
-      - '6050:6050'    
+      - '${SERVER_PORT}:${SERVER_PORT}'    
     command: go run main.go
+    environment:
+      - port=${SERVER_PORT}
+      - dbuser=${POSTGRES_USER}
+      - dbpassword=${POSTGRES_PASSWORD}
+      - dbport=${POSTGRES_PORT}
 
   # PostgreSQL container
   sql:
@@ -19,4 +24,4 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - '5432:5432'
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'

@@ -1,8 +1,31 @@
 package models
 
+type Response struct {
+	Message string			`json:"message"`			
+	Data interface{}		`json:"data"`
+}
+
+type IDResponse struct {
+	ID int	`json:"id"`
+}
+
+type WordDTO struct {
+	Name string `json:"name"`
+}
+
 type GroupDTO struct {
 	ID int
 	Name string
+}
+
+type GroupsDTO []Group
+
+type SongsDTO struct {
+	Songs []SongDTOResp 
+}
+
+type VersesDTO struct {
+	Verses []VerseDTOResp
 }
 
 type SongDTO struct {

@@ -6,12 +6,12 @@ import (
 )
 
 type Song struct {
-	gorm.Model
+	gorm.Model				 `json:"-"`
 	ID int                   `gorm:"primaryKey" json:"-"`
 	Name string              `json:"name"`
 	ReleaseDate *time.Time   `json:"releasedate"`
 	Link string              `json:"link"`
-	GroupID int
-	Group Group
-	Verses []Verse
+	GroupID int				 `json:"-"`
+	Group Group				 `json:"-"`
+	Verses []Verse			 `json:"-"`
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	log "github.com/sirupsen/logrus"
 	"test_effective_mobile/app/domain"
 	"test_effective_mobile/app/domain/models"
 	"test_effective_mobile/app/repository"
@@ -9,10 +9,12 @@ import (
 	"test_effective_mobile/app/controller"
 	"test_effective_mobile/app"
 )
-
+// @title           Effective Mobile TEST
+// @version         1.0
+// @host      		localhost:6050
 func main() {
-	fmt.Println("go started")
-
+	log.SetLevel(5)
+	log.Debug("App have started")
 	db := repository.Engine()
 	(*db).AutoMigrate(&models.Group{}, &models.Song{}, &models.Verse{})
 	

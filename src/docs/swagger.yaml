@@ -1,0 +1,280 @@
+definitions:
+  models.Group:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.IDResponse:
+    properties:
+      id:
+        type: integer
+    type: object
+  models.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+  models.SongDTOResp:
+    properties:
+      group_id:
+        type: integer
+      link:
+        type: string
+      releaseDate:
+        type: string
+      song:
+        type: string
+    type: object
+  models.SongsDTO:
+    properties:
+      songs:
+        items:
+          $ref: '#/definitions/models.SongDTOResp'
+        type: array
+    type: object
+  models.VerseDTOResp:
+    properties:
+      songID:
+        type: integer
+      text:
+        type: string
+    type: object
+  models.VersesDTO:
+    properties:
+      verses:
+        items:
+          $ref: '#/definitions/models.VerseDTOResp'
+        type: array
+    type: object
+host: localhost:6050
+info:
+  contact: {}
+  title: Effective Mobile TEST
+  version: "1.0"
+paths:
+  /group/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group name
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.IDResponse'
+              type: object
+      summary: Add group
+  /group/info:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group name
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Group'
+                  type: array
+              type: object
+      summary: Get group info
+  /song/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group name
+        in: body
+        name: group
+        required: true
+        schema:
+          type: string
+      - description: Song name
+        in: body
+        name: song
+        required: true
+        schema:
+          type: string
+      - description: Link
+        in: body
+        name: link
+        schema:
+          type: string
+      - description: Song text. Versers are divided by /n/n
+        in: body
+        name: text
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.IDResponse'
+              type: object
+      summary: Add group
+  /song/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Song ID
+        in: query
+        name: song_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.IDResponse'
+              type: object
+      summary: Delete song
+  /song/info:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group name
+        in: body
+        name: group
+        required: true
+        schema:
+          type: string
+      - description: Song name
+        in: body
+        name: song
+        required: true
+        schema:
+          type: string
+      - description: Date release
+        in: body
+        name: releaseDat
+        schema:
+          type: string
+      - description: HTTP Link
+        in: body
+        name: link
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.SongsDTO'
+              type: object
+      summary: Get song info
+  /song/update:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group name
+        in: body
+        name: group
+        required: true
+        schema:
+          type: string
+      - description: Song name
+        in: body
+        name: song
+        required: true
+        schema:
+          type: string
+      - description: Date release
+        in: body
+        name: releaseDat
+        schema:
+          type: string
+      - description: HTTP Link
+        in: body
+        name: link
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.IDResponse'
+              type: object
+      summary: Update song
+  /verse/info:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Song ID
+        in: body
+        name: song_id
+        required: true
+        schema:
+          type: integer
+      - description: Page
+        in: body
+        name: page
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.VersesDTO'
+              type: object
+      summary: Get song verse
+swagger: "2.0"
