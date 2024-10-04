@@ -1,7 +1,6 @@
 package interfaces
 
 import (
-	"fmt"
 	"time"
 	"gorm.io/gorm"
 	"strings"
